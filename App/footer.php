@@ -1,0 +1,1 @@
+<div class="footer"><hr/>&copy; 2016 Hangmania | <a href="credit.php" target="_blank">Credits</a></div>
