@@ -3,7 +3,7 @@
     // Set up connection; redirect to log in if cannot connect or not logged in
     if (filter_input(INPUT_COOKIE, "auth") != 1) {
         header("Location: index.php");
-        exit;
+        exit();
     }
 ?>
 <!DOCTYPE html>
@@ -13,19 +13,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
         <style>
-            #display, #message
+            #display, #message, button
             {
-                font-family: 'Indie Flower', cursive;
+                font-family: 'Ubuntu Mono', monospace;
             }
+			.hangman_pic{
+				margin: 0 auto;
+				width: 50%;
+			}
         </style>
     </head>
     <body>
         <div class="container"><?php include 'nav.php'; ?></div>
         
         <div class="container">
-        <div class="container" style="background-color: white;" >
+        <div class="container hangman_pic" style="background-color: white;" >
             <img id="0" src="hm/hm0.jpg" class="img-responsive center-block" style="display: inline"/>
             <img id="1" src="hm/hm1.jpg" class="img-responsive center-block" style="display: none"/>
             <img id="2" src="hm/hm2.jpg" class="img-responsive center-block" style="display: none"/>

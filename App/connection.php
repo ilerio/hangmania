@@ -4,9 +4,9 @@
     {
         //Local variables to maintain encapsulation
         $servername = "localhost";
-        $username = "#";
-        $password = "#";
-        $dbname = "#";
+        $username = "hmaniaUser";
+        $password = "klpi(%E-e}5m";
+        $dbname = "hangmania";
 		
         //Create connection
         $con = new mysqli($servername, $username, $password, $dbname);

@@ -5,7 +5,7 @@
     if (!(isset($_POST["uname"])&&isset($_POST["pswd"])))
     {
         header("Location: index.php");
-        exit;
+        exit();
     }
     
     $uname = filter_input(INPUT_POST, "uname");
@@ -15,7 +15,7 @@
     if ($con == NULL)
     {
         header("Location: index.php");
-        exit;
+        exit();
     }
     
     //query the database to see if email in use.
@@ -37,7 +37,7 @@
 				
         mysqli_close($con);
         header("Location: home.php");
-        exit;
+        exit();
     }
     else
     {

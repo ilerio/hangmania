@@ -11,7 +11,7 @@ Licensed under MIT
     // Set up connection; redirect to log in if cannot connect or not logged in
     if (filter_input(INPUT_COOKIE, "auth") != 1) {
         header("Location: index.php");
-        exit;
+        exit();
     }
     
     $uid = $_SESSION["uid"];
@@ -33,7 +33,7 @@ Licensed under MIT
     }
     
     // Query done for #tablequery
-    $hs_sql = "SELECT uname, score FROM user, highscore WHERE user.uid = highscore.uid ORDER BY score DESC";
+    $hs_sql = "SELECT user.uid, uname, score FROM user, highscore WHERE user.uid = highscore.uid ORDER BY score DESC";
     $hs_result = mysqli_query($con,$hs_sql) or die(mysqli_error($con));
     
     if(mysqli_num_rows($hs_result) > 0)
@@ -67,6 +67,10 @@ Licensed under MIT
         <style>
             body{
                 font-family: arial, sans-serif;
+            }
+            #table_avatar{
+                width: 30px;
+                margin: auto;
             }
         </style>
     </head>
@@ -165,6 +169,7 @@ Licensed under MIT
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Avatar</th>
                                     <th>Rank</th>
                                     <th>Username</th>
                                     <th>Score</th>
@@ -177,10 +182,12 @@ Licensed under MIT
                             foreach($hs_result as $row)
                             {
                                 $count++;
+                                $id = $row["uid"];
                                 $uname_lb = $row["uname"];
                                 $score = $row["score"];
                         ?>
                                 <tr>
+                                    <td id="table_avatar"><img src="updir/<?php echo getAvatarName($id); ?>" class="img-responsive" alt="User Pic" width="30px"></td>
                                     <td><?php echo $count ?></td>
                                     <td><?php echo $uname_lb; ?></td>
                                     <td><?php echo $score; ?></td>
@@ -268,5 +275,26 @@ Licensed under MIT
                 
             }
         </script-->
+        <?php
+            function getAvatarName($id)
+            {
+                $con = getConnection();
+                $sql_avatar = "SELECT avatar FROM user WHERE uid = ".$id;
+                $result_avatar = mysqli_query($con,$sql_avatar) or die(mysqli_error($con));
+    
+                if (mysqli_num_rows($result_avatar) == 1)
+                {
+                    //get the uid of the user
+                    $info = mysqli_fetch_array($result_avatar);
+                    $avt = stripslashes($info['avatar']);
+                    if($avt == null){
+                        return "hangmania_man_only.png";
+                    }else{
+                        return $avt;
+                    }
+                }
+                $con -> close();
+            }
+        ?>
     </body>
 </html>

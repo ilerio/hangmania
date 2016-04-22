@@ -5,7 +5,7 @@ require 'connection.php';
 // Set up connection; redirect to log in if cannot connect or not logged in
 if (filter_input(INPUT_COOKIE, "auth") != 1) {
     header("Location: index.php");
-    exit;
+    exit();
 }
 
 $con = getConnection();
@@ -13,7 +13,7 @@ $con = getConnection();
 if ($con == null)
 {
     echo "false1";
-    exit;
+    exit();
 }
 
 $uid = $_SESSION["uid"];
@@ -36,13 +36,13 @@ if (mysqli_num_rows($result) == 1)
     if($flag)
     {
         echo "true";
-        exit;
+        exit();
     }
 }
 else 
 {
     echo "false2";
-    exit;
+    exit();
 }
 ?>
 

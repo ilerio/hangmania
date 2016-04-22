@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>validate</title>
-</head>
-<body>
 <?php 
     session_start();
     require 'connection.php';
@@ -55,7 +49,7 @@
 				
                 mysqli_close($con);
 		header("Location: home.php");
-		exit;
+		exit();
             }
             else
             {
@@ -77,5 +71,3 @@ else
     echo "<a href='register.php'>Back</a>";
 }
 ?>
-</body>
-</html>
